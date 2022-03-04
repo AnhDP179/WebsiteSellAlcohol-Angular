@@ -1,0 +1,162 @@
+<div class="breadcrumbs" id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <i class="ace-icon fa fa-home home-icon"></i>
+      <a href="#">Trang chủ</a>
+    </li>
+    <li class="active">Quản lý loại sản phẩm</li>
+  </ul>
+  <div class="nav-search">
+    <p class="pull-right no-margin">
+      <a (click)="createModal()" class="btn btn-success btn-xs">
+        <i class="fa fa-plus"></i>&nbsp;Thêm
+      </a>
+    </p>
+  </div>
+</div>
+<div class="row">
+
+  <div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <p-panel header="Tìm kiếm" [style]="{'margin-top': '2px'}">
+      <form class="form-horizontal" role="form" [formGroup]="formsearch" (ngSubmit)="search()">
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right"> Tên khách hàng </label>
+          <div class="col-sm-11">
+            <input formControlName="customerName" type="text" placeholder="Tên khách hàng" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right"> Email</label>
+          <div class="col-sm-11">
+            <input formControlName="email" type="text" placeholder="Email" style="width: 100%;" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right"></label>
+          <div class="col-sm-11">
+            <button (click)="search()" class="btn btn-sm btn-primary">Tìm kiếm</button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+    <p-table selectionMode="single" [value]="customers" styleClass="p-datatable-gridlines"
+      [style]="{'margin-top': '2px'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 70px; text-align: center;">STT</th>
+          <th style="width: 25%; text-align: left;">Tên khách hàng</th>
+          <th style="width: 23%; text-align: left;">Ngày sinh</th>
+          <th style="width: 23%; text-align: left;">Địa chỉ</th>
+          <th style="width: 13%; text-align: left;">Số điện thoại</th>
+          <th style="width: 20%; text-align: left;">Email</th>
+          <th style="width: 100px; text-align: left;">Chức năng</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-i="rowIndex">
+        <tr>
+          <td style="width: 40px; text-align: center;">{{ i + 1 }}</td>
+          <td>{{ item.customerName }}</td>
+          <td>{{ item.dateOfBirth | date:'dd/MM/yyyy' }}</td>
+          <td>{{ item.address }}</td>
+          <td>{{ item.phone }}</td>
+          <td>{{ item.email }}</td>
+          <td class="action-col">
+            <div class="btn-group">
+              <button title="" class="btn btn-xs btn-white btn-default" (click)="openUpdateModal(item)">
+                <i class="ace-icon fa fa-edit"></i>
+              </button>
+              <button title="" class="btn btn-xs btn-white btn-default" (click)="onDelete(item)">
+                <i class="ace-icon fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- PAGE CONTENT ENDS -->
+  </div>
+  <div class="col-xs-12" style="text-align: right;">
+    <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true"
+      (pageChange)="loadPage($event)"></ngb-pagination>
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+<p-dialog [(visible)]="displayAdd" [style]="{width: '30vw'}" [dismissableMask]="true" [modal]="true">
+
+  <form (ngSubmit)="AddNewProduct(form)" #form="ngForm">
+    <ng-template pTemplate="header">
+      <h3>Thêm khách hàng mới </h3>
+    </ng-template>
+
+    <div style="width: 90%; margin-left: 5%;">
+
+      <label style="font-weight: bold;">Tên khách hàng:</label>
+      <input type="text" class="form-control" name="customerName" ngModel #customerName="ngModel"
+        placeholder="Tên khách hàng">
+      <label style="font-weight: bold;">Ngày sinh:</label>
+      <input type="text" class="form-control" placeholder="Ngày sinh" name="dateOfBirth" ngModel #dateOfBirth="ngModel">
+      <label style="font-weight: bold;">Địa chỉ:</label>
+      <input type="text" class="form-control" placeholder="Địa chỉ" name="address" ngModel #address="ngModel">
+      <label style="font-weight: bold;">Số điện thoại:</label>
+      <input type="text" class="form-control" placeholder="Số điện thoại" name="phone" ngModel #phone="ngModel">
+      <label style="font-weight: bold;">Email:</label>
+      <input type="text" class="form-control" placeholder="Email" name="email" ngModel #email="ngModel">
+      <label style="font-weight: bold;">Password:</label>
+      <input type="password" class="form-control" placeholder="Password" name="password" ngModel #password="ngModel">
+    </div>
+    <p-footer>
+      <button type="submit" class="btn btn-primary waves-effect waves-light mr-2">
+        <i class="mdi mdi-check"></i>
+        Thêm
+      </button>
+      <button type="button" (click)="displayAdd=false" class="btn btn-danger waves-effect waves-light"> <i
+          class="mdi mdi-window-close"></i>
+        Huỷ
+      </button>
+    </p-footer>
+  </form>
+</p-dialog>
+<p-dialog [(visible)]="isEdit" [style]="{width: '30vw'}" [dismissableMask]="true" [modal]="true">
+
+  <form (ngSubmit)="SaveData()" #form="ngForm">
+
+    <ng-template pTemplate="header">
+      <h3>Sửa sản phẩm </h3>
+    </ng-template>
+    <div style="width: 90%; margin-left: 5%;">
+      <label style="font-weight: bold;">Tên khách hàng:</label>
+      <input type="text" class="form-control" [(ngModel)]="customer.customerName" name="customerName" ngModel
+        #customerName="ngModel" placeholder="Tên khách hàng">
+      <label style="font-weight: bold;">Ngày sinh:</label>
+      <input type="text" class="form-control" placeholder="Ngày sinh" name="dateOfBirth" ngModel #dateOfBirth="ngModel"
+        [(ngModel)]="customer.dateOfBirth">
+      <label style="font-weight: bold;">Địa chỉ:</label>
+      <input type="text" class="form-control" placeholder="Địa chỉ" name="address" ngModel #address="ngModel"
+        [(ngModel)]="customer.address">
+      <label style="font-weight: bold;">Số điện thoại:</label>
+      <input type="text" class="form-control" placeholder="Số điện thoại" name="phone" ngModel #phone="ngModel"
+        [(ngModel)]="customer.phone">
+      <label style="font-weight: bold;">Email:</label>
+      <input type="text" class="form-control" placeholder="Email" name="email" ngModel #email="ngModel"
+        [(ngModel)]="customer.email">
+      <label style="font-weight: bold;">Password:</label>
+      <input type="text" class="form-control" placeholder="Password" name="password" ngModel #password="ngModel"
+        [(ngModel)]="customer.password">
+      <label style="font-weight: bold;">role:</label>
+      <input type="text" class="form-control" placeholder="Quyền" name="role" ngModel #role="ngModel"
+        [(ngModel)]="customer.role">
+    </div>
+    <p-footer>
+      <button type="submit" class="btn btn-primary waves-effect waves-light mr-2">
+        <i class="mdi mdi-check"></i>
+        Lưu
+      </button>
+      <button type="button" (click)="isEdit=false" class="btn btn-danger waves-effect waves-light"> <i
+          class="mdi mdi-window-close"></i>
+        Huỷ
+      </button>
+    </p-footer>
+  </form>
+</p-dialog>

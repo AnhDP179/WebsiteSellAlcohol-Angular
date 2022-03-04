@@ -1,0 +1,77 @@
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/bg_2.jpg');"
+	data-stellar-background-ratio="0.5">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row no-gutters slider-text align-items-end justify-content-center">
+			<div class="col-md-9 ftco-animate mb-5 text-center">
+				<p class="breadcrumbs mb-0"><span class="mr-2"><a href="home">Trang chủ <i
+								class="fa fa-chevron-right"></i></a></span> <span>Sản phẩm <i
+							class="fa fa-chevron-right"></i></span></p>
+				<h2 class="mb-0 bread">Sản phẩm</h2>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ftco-section">
+	<div class="container">
+		<div class="sort-select-list d-flex align-items-center">
+			<label class="mr-2">Hiển thị:</label>
+			
+			<fieldset>
+				<select class="form-control" [(ngModel)]="pageSize" (ngModelChange)="loadPage(1)">
+					<option selected value="3">3</option>
+					<option value="6">6</option>
+					<option value="9">9</option>
+					<option value="15">15</option>
+					<option value="1000">Tất cả sản phẩm</option>
+				</select>
+			</fieldset>		
+		</div> 
+		<div class="row">
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-4 d-flex" *ngFor="let item of list_item ">
+						<div class="product ftco-animate">
+							<div class="img d-flex align-items-center justify-content-center"
+								style="background-image: url(../assets/upload/{{item.picture}});" alt="images">
+								<div class="desc">
+									<p class="meta-prod d-flex">
+										<a routerLink="/product" data-bs-toggle="modal" (click)="addToCart(item)"
+											class="d-flex align-items-center justify-content-center"><i
+												class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+										<a href="#" class="d-flex align-items-center justify-content-center"><i
+												class="fa fa-heart-o" aria-hidden="true"></i></a>
+										<a href="/product_detail/{{item.id}}"
+											class="d-flex align-items-center justify-content-center"><i
+												class="fa fa-eye" aria-hidden="true"></i></a>
+									</p>
+								</div>
+							</div>
+							<div class="text text-center">
+								<span class="category" value="#"></span>
+								<h2 routerLink="/product-detail/{{item.id}}">{{item.wine_name}}</h2>
+								<p class="mb-0"> <span class="price" value="#">{{item.price | number}} VND</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="shop_toolbar t_bottom">
+                    <ngb-pagination [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page" [maxSize]="5" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+
+			</div>
+			<div class="col-md-3">
+				<div class="sidebar-box ftco-animate">
+					<div class="categories">
+						<h3>Loại sản phẩm</h3>
+						<ul class="p-0">
+							<li *ngFor="let category of categories"><a
+									routerLink="/product-list/{{category.id}}">{{category.manufacturer}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

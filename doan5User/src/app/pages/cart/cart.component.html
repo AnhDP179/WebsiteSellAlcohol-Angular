@@ -1,0 +1,85 @@
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/bg_2.jpg');"
+	data-stellar-background-ratio="0.5">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row no-gutters slider-text align-items-end justify-content-center">
+			<div class="col-md-9 ftco-animate mb-5 text-center">
+				<p class="breadcrumbs mb-0"><span class="mr-2"><a href="home">Trang chủ <i
+								class="fa fa-chevron-right"></i></a></span> <span>Giỏ hàng <i
+							class="fa fa-chevron-right"></i></span></p>
+				<h2 class="mb-0 bread">Giỏ hàng của bạn</h2>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ftco-section">
+	<div class="container">
+		<div class="row">
+			<div class="table-wrap">
+				<table class="table">
+					<thead class="thead-primary">
+						<tr>
+							<th>STT</th>
+							<th>Hình ảnh</th>
+							<th>Tên rượu</th>
+							<th>Giá (VND)</th>
+							<th>Số lượng</th>
+							<th>Tổng tiền (VND)</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr class="alert" role="alert" *ngFor="let product of items; let i = index"  >
+
+							<td class="text-center">{{i + 1 }}</td>
+							<td>
+								<div class="img" style="background-image: url(../assets/upload/{{product.picture}});"></div>
+							</td>
+							<td>
+								<div class="email" style="text-align: left">
+									<span><a href="#">{{product.wine_name }}</a></span>
+								</div>
+							</td>
+							<td style="text-align: right"> {{product.price | number}}</td>
+							<td class="product_quantity"><input #inp min="1" max="100" value="1" (change)="addQty(product,inp.value)" [value]="product.quantity" type="number"></td>
+
+							<td style="text-align: right; color:orangered">{{product.giaBan| currency: "VND"}}  </td>
+							<td class="text-center">
+								<a (click)="_cart.deleteItem(product.id)"><i class="fa fa-trash-o"></i></a>
+							</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row justify-content-end">
+			<div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+				<div class="cart-total mb-3">
+					<h3>Giá trị giỏ hàng</h3>
+					<p class="d-flex">
+						<span>Thành tiền</span>
+						<span style="text-align: right"> {{total| currency: "VND"}} VND</span>
+					</p>
+					<p class="d-flex">
+						<span>Phí giao hàng</span>
+						<span style="text-align: right">0.00 VND</span>
+					</p>
+					<p class="d-flex">
+						<span>Thuế</span>
+						<span style="text-align: right">0.00 VND</span>
+					</p>
+					<hr>
+					<p class="d-flex total-price">
+						<span>Tổng cộng</span>
+						<span style="text-align: right; color:red">{{total| currency: "VND"}} VND</span>
+					</p>
+				</div>
+				<p class="text-center"><a routerLink="/checkout" class="btn btn-primary py-3 px-4" *ngIf="total>0">Thanh toán</a></p>
+			</div>
+		</div>
+	</div>
+</section>

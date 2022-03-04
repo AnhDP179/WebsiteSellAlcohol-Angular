@@ -1,0 +1,238 @@
+<div class="breadcrumbs" id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <i class="ace-icon fa fa-home home-icon"></i>
+      <a href="#">Trang chủ</a>
+    </li>
+    <li class="active">Quản lý đơn hàng</li>
+  </ul>
+  <div class="nav-search">
+    <p class="pull-right no-margin"></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <p-panel header="Tìm kiếm" [style]="{ 'margin-top': '2px' }">
+      <form class="form-horizontal" role="form" [formGroup]="formsearch" (ngSubmit)="search()">
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right"> Họ tên</label>
+          <div class="col-sm-11">
+            <input formControlName="hoTen" type="text" placeholder="Họ tên" style="width: 100%" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right">
+            Địa chỉ
+          </label>
+          <div class="col-sm-11">
+            <input formControlName="diaChiNhan" type="text" placeholder="Địa chỉ" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label no-padding-right"></label>
+          <div class="col-sm-11">
+            <button (click)="search()" class="btn btn-sm btn-primary">
+              Tìm kiếm
+            </button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+    <p-table selectionMode="single" [value]="orders" styleClass="p-datatable-gridlines"
+      [style]="{ 'margin-top': '2px', width: '100%' }" [dataKey]="'maDonHang'" (onRowExpand)="onRowExpand($event)">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 50px; text-align: center">
+            <i class="ace-icon fa fa-expand-arrows-alt"></i>
+          </th>
+          <th style="width: 70px; text-align: center">STT</th>
+          <th style="width: 13%; text-align: left">Họ tên</th>
+          <th style="text-align: center">Địa chỉ</th>
+          <th style="text-align: center">Số điện thoại</th>
+          <th style="text-align: center">Tình trạng</th>
+          <th style="text-align: center">Tổng tiền (VND)</th>
+          <th style="text-align: center">Ngày Đặt</th>
+          <th style="text-align: center">Ghi Chú</th>
+
+          <th style="width: 120px; text-align: center">Tác vụ</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-i="rowIndex" let-expanded="expanded">
+        <tr>
+          <td style="width: 50px; text-align: center">
+            <a href="#" [pRowToggler]="item">
+              <i [ngClass]="
+                  expanded
+                    ? 'fa fa-fw fa-angle-double-down'
+                    : 'fa fa-fw fa-angle-double-right'
+                "></i>
+            </a>
+          </td>
+          <td style="width: 70px; text-align: center">{{ i + 1 }}</td>
+          <td>{{ item.hoTen }}</td>
+          <td>{{ item.diaChiNhan }}</td>
+          <td style="text-align: right">{{ item.sdtNhan }}</td>
+          <td style="text-align: center">{{ item.tinhTrang }}</td>
+          <td style="text-align: right">{{ item.tongTien | number }}</td>
+          <td style="text-align: right">{{ item.ngayDat }}</td>
+          <td>{{ item.note }}</td>
+
+          <td class="action-col">
+            <div class="btn-group">
+              <button title="" class="btn btn-xs btn-white btn-default" (click)="openUpdateModal(item)">
+                <i class="ace-icon fa fa-edit"></i>
+              </button>
+              <button title="" class="btn btn-xs btn-white btn-default" (click)="onDelete(item)">
+                <i class="ace-icon fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template let-emp pTemplate="rowexpansion">
+        <tr>
+          <td [attr.colspan]="12" style="width: 100%">
+            <div *ngIf="!doneSetup" class="loading-overlay">
+              <i class="fa fa-spinner fa-spin orange"></i>
+            </div>
+            <div *ngIf="doneSetup" class="ui-grid ui-grid-responsive ui-fluid">
+              <h3>THÔNG TIN ĐƠN HÀNG</h3>
+              <div>Họ tên: {{ orderdetail.hoTen }}</div>
+              <div>Địa chỉ: {{ orderdetail.diaChiNhan }}</div>
+              <h5>CHI TIẾT ĐƠN HÀNG</h5>
+              <p-table [value]="orderdetail.listjson_chitiet" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+        <tr>
+          <th style=" width: 50px; text-align: center">STT</th>
+          <th>Tên sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Giá bán</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-it let-i="rowIndex">
+        <tr>
+          <td style="width:50px; text-align: center">{{ i + 1 }}</td>
+          <td>{{ it.wine_name }}</td>
+          <td style=" text-align: right">{{ it.soLuong }}</td>
+          <td style=" text-align: right">{{ it.giaBan | number}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  </td>
+  </tr>
+  </ng-template>
+  </p-table>
+  <!-- PAGE CONTENT ENDS -->
+</div>
+<div class="col-xs-12" style="text-align: right">
+  <ngb-pagination [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true"
+    (pageChange)="loadPage($event)"></ngb-pagination>
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+<div *ngIf="showUpdateModal" id="createUserModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg full-height-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cập nhật hóa đơn bán hàng</h4>
+      </div>
+      <form *ngIf="doneSetupForm" [formGroup]="formdata" (ngSubmit)="onSubmit(formdata.value)"
+        class="form-horizontal utehy-form">
+        <div class="modal-body no-padding">
+          <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right"> Họ tên(<span style="color: red;">*</span>)</label>
+            <div class="col-sm-10">
+              <input type="text" placeholder="Họ tên" formControlName="hoTen" />
+              <div *ngIf="submitted && f.hoTen.errors" class="invalid-feedback">
+                <div *ngIf="f.hoTen.errors.required">Họ tên là bắt buộc</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right"> Địa chỉ</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="diaChiNhan" placeholder="Địa chỉ" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right"> Số điện thoại</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="sdtNhan" placeholder="Số điện thoại " />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">Ghi chú</label>
+            <div class="col-sm-10">
+              <input type="text" formControlName="note" placeholder="Ghi chú" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right"> Sản phẩm</label>
+            <div class="col-sm-4">
+              <p-dropdown [options]="items" formControlName="sanpham" [(ngModel)]="item" optionLabel="wine_name"
+                optionValue="id" [style]="{'width':'100%'}"></p-dropdown>
+            </div>
+            <label class="col-sm-2 control-label no-padding-right"> Số lượng</label>
+            <div class="col-sm-3">
+              <input type="text" formControlName="soLuong" [(ngModel)]="soLuong" placeholder="Số lượng" />
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-default btn-sm" (click)="Them()">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="!doneSetupForm" class="loading-overlay">
+            <i class="fa fa-spinner fa-spin orange"></i>
+          </div>
+          <div *ngIf="doneSetupForm" class="ui-grid ui-grid-responsive ui-fluid">
+            <h3>THÔNG TIN ĐƠN HÀNG</h3>
+            <div>Họ tên: {{orderdetail.hoTen}}</div>
+            <div>Địa chỉ: {{orderdetail.diaChiNhan}}</div>
+            <div>Số điện thoại: {{orderdetail.sdtNhan}}</div>
+            <h5>CHI TIẾT ĐƠN HÀNG</h5>
+            <p-table [value]="orderdetail.listjson_chitiet" responsiveLayout="scroll">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Tên sản phẩm</th>
+                  <th style="width: 100px;">Số lượng</th>
+                  <th style="width: 50px;">Tác vụ</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-it>
+                <tr>
+                  <td>{{it.wine_name}}</td>
+                  <td pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input formControlName="abc" pInputText type="text" [(ngModel)]="it.soLuong">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{it.soLuong}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 50px;"><button type="button" class="btn btn-default btn-sm" (click)="Xoa(it)">
+                      <i class="fa fa-times"></i>
+                    </button></td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success btn-sm btn-submit">
+            <i class="fa fa-save"></i> Cập nhật
+          </button>
+          <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">
+            <i class="fa fa-times"></i> Đóng lại
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

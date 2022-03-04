@@ -1,0 +1,162 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-9">
+      <div class="row">
+        <div class="col-md-9 monthly-earning-wid">
+          <div class="card" style="height: 480px;">
+            <div class="card-body">
+              
+              <h4 class="card-title">Thu nhập hàng tháng</h4>
+              <div class="text-center">
+                <div class="btn-group mt-4" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-secondary">Ngày</button>
+                  <button type="button" class="btn btn-secondary">Tháng</button>
+                  <button type="button" class="btn btn-secondary">Năm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 earning-wid">
+          <div class="card" style="height: 480px;">
+            <div class="card-body">
+              <div class="mb-4">
+                <p>Thu nhập hàng tuần</p>
+                <h5>$1,542</h5>
+                <span class="peity-line" data-width="100%"
+                  data-peity='{ "fill": ["rgba(103,168,228,0.3)"],"stroke": ["rgba(103,168,228,0.8)"]}'
+                  data-height="60">6,2,8,4,3,8,1,3,6,5,9,2,8,1,4,8,9,8,2,1</span>
+              </div>
+              <div class="mb-4">
+                <p>Thu nhập hàng tháng</p>
+                <h5>$6,451</h5>
+                <span class="peity-line" data-width="100%"
+                  data-peity='{ "fill": ["rgba(74,193,142,0.3)"],"stroke": ["rgba(74,193,142,0.8)"]}'
+                  data-height="60">6,2,8,4,-3,8,1,-3,6,-5,9,2,-8,1,4,8,9,8,2,1</span>
+              </div>
+              <div class="mb-4">
+                <p>Thu nhập hàng năm</p>
+                <h5>$84,574</h5>
+                <span class="peity-line" data-width="100%"
+                  data-peity='{ "fill": ["rgba(232, 65, 38,0.3)"],"stroke": ["rgba(232, 65, 38,0.8)"]}'
+                  data-height="60">6,2,8,4,3,8,1,3,6,5,9,2,8,1,4,8,9,8,2,1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Phân tích bán hàng</h4>
+          <div class="row text-center mt-4 pt-3">
+            <div class="col-6">
+              <h5 class="mb-0 font-size-18">25610</h5>
+              <p class="text-muted">Đã kích hoạt</p>
+            </div>
+            <div class="col-6">
+              <h5 class="mb-0 font-size-18">56210</h5>
+              <p class="text-muted">Chưa giải quyết</p>
+            </div>
+          </div>
+          <div id="donut-chart" dir="ltr"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+
+  <div class="col-xl-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Đơn đặt hàng</h4>
+        <div class="text-center">
+          <div dir="ltr">
+            <input class="knob" data-width="120" data-height="120" data-linecap=round data-fgColor="#4ac18e"
+              value="{{slhd}}" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".1">
+          </div>
+          <a href="product/order" class="btn btn-sm btn-success mt-4">Xem tất cả dữ liệu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Số lượng loại sản phẩm</h4>
+
+        <div class="text-center">
+          <div dir="ltr">
+            <input class="knob" data-width="120" data-height="120" data-linecap=round data-fgColor="#ffbb44"
+              value="{{slloaisp}}" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".1">
+          </div>
+          <a href="product/type" class="btn btn-sm btn-warning text-white mt-4">Xem tất cả dữ liệu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Số lượng sản phẩm</h4>
+        <div class="text-center">
+          <div dir="ltr">
+            <input class="knob" data-width="120" data-height="120" data-linecap=round data-fgColor="#8d6e63"
+              value="{{slsp}}" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".1">
+          </div>
+          <a href="product/product" class="btn btn-sm btn-brown mt-4">Xem tất cả dữ liệu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Số lượng khách hàng</h4>
+        <div class="text-center">
+          <div dir="ltr">
+            <input class="knob" data-width="120" data-height="120" data-linecap=round data-fgColor="#90a4ae"
+              value="{{slnd}}" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".1">
+          </div>
+          <a href="product/customer" class="btn btn-sm btn-blue-grey mt-4">Xem tất cả dữ liệu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- end row -->
+<!-- <div class="col-xl-3">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title mb-4">Sản phẩm bán chạy</h4>
+      <div class="table-responsive" >        
+        <table class="table table-centered table-vertical table-nowrap mb-0" >
+          <tbody >
+            <tr *ngFor="let item of product_singles">
+              <td></td>
+              <td>
+                <img src="assets/upload/{{item.picture}}" alt="user-image" style="height: 48px;" class="rounded me-2">
+              </td>
+              <td><span class="badge rounded-pill bg-success">{{item.wine_name}}</span></td>
+              <td>
+                $185
+              </td>
+              <td>
+                5/12/2016
+              </td>
+              <td>
+                <button type="button" class="btn btn-secondary btn-sm waves-effect">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> -->

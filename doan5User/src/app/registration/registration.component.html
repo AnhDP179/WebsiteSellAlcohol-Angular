@@ -1,0 +1,100 @@
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/bg_2.jpg');"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+            <div class="col-md-9 ftco-animate mb-5 text-center">
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="home">Trang chủ <i
+                                class="fa fa-chevron-right"></i></a></span> <span>Đăng ký <i
+                            class="fa fa-chevron-right"></i></span></p>
+                <h2 class="mb-0 bread">Đăng ký</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="page-container">
+                    <div class="page-login-box" style="margin-left: 400px;">
+                        <div class="page-login-widget animated fadeInRight" style="margin-right: 300px;">
+                            <form (ngSubmit)="AddNewProduct(form)" #form="ngForm">
+                                <ng-template pTemplate="header">
+                                    <h3>Thêm khách hàng mới </h3>
+                                </ng-template>
+                                <div style="width: 90%;">
+                                    <label style="font-weight: bold;">Tên khách hàng:</label>
+                                    <input type="text" class="form-control" name="customerName" ngModel
+                                        #customerName="ngModel" placeholder="Tên khách hàng">
+                                    <label style="font-weight: bold;">Ngày sinh:</label>
+                                    <input type="text" class="form-control" placeholder="Ngày sinh" name="dateOfBirth"
+                                        ngModel #dateOfBirth="ngModel">
+                                    <label style="font-weight: bold;">Địa chỉ:</label>
+                                    <input type="text" class="form-control" placeholder="Địa chỉ" name="address" ngModel
+                                        #address="ngModel">
+                                    <label style="font-weight: bold;">Số điện thoại:</label>
+                                    <input type="text" class="form-control" placeholder="Số điện thoại" name="phone"
+                                        ngModel #phone="ngModel">
+                                    <label style="font-weight: bold;">Email:</label>
+                                    <input type="text" class="form-control" placeholder="Email" name="email" ngModel
+                                        #email="ngModel">
+                                    <label style="font-weight: bold;">Password:</label>
+                                    <input type="password" class="form-control" placeholder="Password" name="password"
+                                        ngModel #password="ngModel">
+                                </div>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light mr-2" style="margin-top: 10px;">
+                                    <i class="mdi mdi-check"></i>
+                                    Đăng kí
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="page-container">
+                    <div class="page-login-box" style="margin-left: 400px;">
+                        <div class="page-login-widget animated fadeInRight">
+                            <form (ngSubmit)="AddNewProduct(form)" #form="ngForm">
+                                <ng-template pTemplate="header">
+                                    <h3>Thêm khách hàng mới </h3>
+                                </ng-template>
+                                <div style="width: 90%; margin-left: 5%;">
+                                    <label style="font-weight: bold;">Tên khách hàng:</label>
+                                    <input type="text" class="form-control" name="customerName" ngModel
+                                        #customerName="ngModel" placeholder="Tên khách hàng">
+                                    <label style="font-weight: bold;">Ngày sinh:</label>
+                                    <input type="text" class="form-control" placeholder="Ngày sinh" name="dateOfBirth"
+                                        ngModel #dateOfBirth="ngModel">
+                                    <label style="font-weight: bold;">Địa chỉ:</label>
+                                    <input type="text" class="form-control" placeholder="Địa chỉ" name="address" ngModel
+                                        #address="ngModel">
+                                    <label style="font-weight: bold;">Số điện thoại:</label>
+                                    <input type="text" class="form-control" placeholder="Số điện thoại" name="phone"
+                                        ngModel #phone="ngModel">
+                                    <label style="font-weight: bold;">Email:</label>
+                                    <input type="text" class="form-control" placeholder="Email" name="email" ngModel
+                                        #email="ngModel">
+                                    <label style="font-weight: bold;">Password:</label>
+                                    <input type="password" class="form-control" placeholder="Password" name="password"
+                                        ngModel #password="ngModel">
+                                </div>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light mr-2">
+                                    <i class="mdi mdi-check"></i>
+                                    Đăng kí
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->

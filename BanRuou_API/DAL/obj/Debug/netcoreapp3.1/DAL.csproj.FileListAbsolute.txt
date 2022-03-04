@@ -1,0 +1,12 @@
+D:\Visual Studio 2019\BanRuou\DAL\bin\Debug\netcoreapp3.1\DAL.deps.json
+D:\Visual Studio 2019\BanRuou\DAL\bin\Debug\netcoreapp3.1\DAL.dll
+D:\Visual Studio 2019\BanRuou\DAL\bin\Debug\netcoreapp3.1\DAL.pdb
+D:\Visual Studio 2019\BanRuou\DAL\obj\Debug\netcoreapp3.1\DAL.csprojAssemblyReference.cache
+D:\Visual Studio 2019\BanRuou\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfoInputs.cache
+D:\Visual Studio 2019\BanRuou\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfo.cs
+D:\Visual Studio 2019\BanRuou\DAL\obj\Debug\netcoreapp3.1\DAL.dll
+D:\Visual Studio 2019\BanRuou\DAL\obj\Debug\netcoreapp3.1\DAL.pdb
+D:\Visual Studio 2019\BanRuou\DAL\bin\Debug\netcoreapp3.1\Model.dll
+D:\Visual Studio 2019\BanRuou\DAL\bin\Debug\netcoreapp3.1\Model.pdb
+D:\Visual Studio 2019\BanRuou\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.CopyComplete
+D:\Visual Studio 2019\BanRuou\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.CoreCompileInputs.cache
